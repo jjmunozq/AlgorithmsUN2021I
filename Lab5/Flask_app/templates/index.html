@@ -1,24 +1,25 @@
-import flask
+<!DOCTYPE html>
 
-# A simple Flask App which takes
-# a user's name as input and responds
-# with "Hello {name}!"
+<!--
+A simple Flask App which takes
+a user's name as input and responds
+with "Hello {name}!"
+-->
 
-app = flask.Flask(__name__)
-
-
-
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    message = ''
-    if flask.request.method == 'POST':
-        peso = flask.request.form['peso']
-        altura = flask.request.form['altura']
-        altura = float(altura)/100.0
-        imc = (float(peso) / (float(altura) * float(altura)))
-        message = 'Tu imc es: ' + str(imc)
-    return flask.render_template('index.html', message=message)
-
-if __name__ == '__main__':
-    app.run()
-
+<html>
+    <head>
+        <title>Calculadora de IMC</title>
+        <link rel="shortcut icon" href="{{url_for('static', filename='favicon.png')}}" type="image/x-icon">
+    </head>
+    <body>
+       <center> <H1>Calculadora del IMC para adultos</H1>
+        Esta calculadora proporciona el IMC y la correspondiente categoría de nivel de peso según el IMC. Utilícela para adultos de 20 años o más.
+        <form method="POST">
+            Peso: <input type="text" name="peso"> Kg<br>
+            Altura <input type="text" name="altura"> cm<br>
+            <button type="submit">Analizar</button>
+        </form>
+        <p>{{message}}</p>
+        <img src="https://statics-cuidateplus.marca.com/sites/default/files/images/Tabla-IMC(1).jpg">
+    </center></body>
+</html>
